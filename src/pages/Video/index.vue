@@ -1,9 +1,9 @@
 <template>
-	<div>index</div>
+	<div>Video</div>
 </template>
 <script>
 	export default {
-		name: 'index'
+		name: 'tvideo'
 	}
 </script>
 <style>

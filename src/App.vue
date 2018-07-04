@@ -1,23 +1,63 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <transition :name="animate">
+      <keep-alive>
+        <router-view id="view"></router-view>
+      </keep-alive>
+    </transition>
+    
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      animate: ''
+    }
+  },
+  watch: {
+    $route(to, from) {
+      /*
+        0: 不做动画
+        1: 左切换
+        2: 右切换
+        3: 上切换
+        4: 下切换
+      */
+      // debugger
+      let animate = this.$router.animate || to.meta.slide;
+      if(!animate) {
+        this.animate = '';
+      }else {
+        this.animate = animate === 1 ?  'slide-left' :
+                        animate === 2 ?  'slide-right' :
+                        animate === 3 ?  'slide-top' :
+                        animate === 4 ?  'slide-bottom' : ''
+      }
+      this.$router.animate = 0;
+    }
+  }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
+  height: 100%;
 }
+#view {
+  transition: all .5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+.slide-left-enter {
+  opacity: 0;
+  transform: translate(100%, 0);
+}
+.slide-left-leave-to {
+  opacity: 0;
+  transform: translate(-100%, 0);
+}
+    
+
 </style>

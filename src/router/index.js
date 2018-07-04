@@ -1,15 +1,33 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Layout from '@/pages/Layout/index.vue'
+import Index from '@/pages/Index/index.vue'
+import Video from '@/pages/Video/index.vue'
 
+Router.prototype.animate = 0;
 Vue.use(Router)
 
-export default new Router({
-  routes: [
+/*
+** slide 页面切换动画
+*/
+const routes = [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'index',
+      component: Layout,
+      children: [
+      	{path: '', component: Index}
+      ]
+    },
+    {
+      path: '/video',
+      name: 'video',
+      component: Video,
+      meta: {slide: 1}
+      
     }
-  ]
+];
+
+export default new Router({
+  routes: routes
 })

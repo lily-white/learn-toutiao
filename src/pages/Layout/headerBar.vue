@@ -1,9 +1,9 @@
 <template>
-	<div>index</div>
+	<div>header</div>
 </template>
 <script>
 	export default {
-		name: 'index'
+		name: 'headerBar'
 	}
 </script>
 <style>
