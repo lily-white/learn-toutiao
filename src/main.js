@@ -2,7 +2,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './utils/rem.js'
-import './styles/css/phone-reset.css'
+import './styles/index.css'
+
+import './utils/iconfont.js'
+
+import InstallComponents from './components/install-components.js'
+Vue.use(InstallComponents)
 
 Vue.config.productionTip = false
 

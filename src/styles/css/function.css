@@ -1,0 +1,24 @@
+/* flex布局 */
+.df-sb {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.df-sa {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.fc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bt {
+    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+}

@@ -18,5 +18,9 @@ module.exports = {
     source: 'src',
     img: 'src',
     image: 'xlink:href'
-  }
+  },
+  postcss: [
+    require('postcss-cssnext')(),
+    require('postcss-salad')()
+  ]
 }
