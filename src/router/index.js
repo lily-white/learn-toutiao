@@ -22,8 +22,10 @@ const routes = [
     {
       path: '/video',
       name: 'video',
-      component: Video,
-      meta: {slide: 1}
+      component: Layout,
+      children: [
+        {path: '', component: Video}
+      ]
       
     }
 ];

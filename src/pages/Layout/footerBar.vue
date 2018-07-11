@@ -1,6 +1,6 @@
 <template>
 	<div class="footer df-sb fc bt">
-		<router-link :to="item.path" class="footer-item" :class="{'is-active':item.path}" v-for="item in footerList">
+		<router-link :to="item.path" class="footer-item" :class="{'is-active': ($route.matched[0].path || $route.matched[1].path) === item.path}" v-for="item in footerList">
 			<icon-svg :name="item.icon"></icon-svg>	
 			<span class="label">{{item.title}}</span>
 		</router-link>
