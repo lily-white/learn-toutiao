@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {footerList, menuList} from './modules/menu.js'
+import home from './modules/home.js'
+import getters from './getters.js'
 
 Vue.use(Vuex);
 
-const state = {
-	footerList,
-    menuList: menuList.slice(0, 12),
-    menuIndex: 0
-};
+const store = new Vuex.Store({
+	modules: {
+		home
+	},
+	getters
+});
 
-export default new Vuex.Store({state})
+export default store

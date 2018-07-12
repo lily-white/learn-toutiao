@@ -14,7 +14,7 @@
 <script>
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import {mapState} from 'vuex'
+import {mapGetters} from 'vuex'
 	export default {
 		name: 'topbar',
 		components: {
@@ -29,7 +29,7 @@ import {mapState} from 'vuex'
 			}
 		},
 		computed: {
-			...mapState(['menuList', 'menuIndex'])
+			...mapGetters(['menuList', 'menuIndex'])
 		}
 	}
 </script>
