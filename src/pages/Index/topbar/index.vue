@@ -1,14 +1,15 @@
 <template>
-	<div class="topbar-wrapper df-sb">
+	<div class="topbar-wrapper df-sb bb">
 		<div class="topbar-menu">
 			<swiper :options="swiperOption">
-				<swiper-slide v-for="(item, index) in menuList" :class="{'is-active': menuIndex === index}">{{item.title}}</swiper-slide>
+				<swiper-slide v-for="(item, index) in menuList" :class="{'is-active': menuIndex === index}" :key="index">{{item.title}}</swiper-slide>
 			</swiper>
 		</div>
 		<div class="topbar-more-btn fc">
 			<i class="list-shadow"></i>
-			<span class="cross"></span>
+			<span class="cross" @click="isTopbarBox=true"></span>
 		</div>
+		<topbar-box :class="{'topbar-active': isTopbarBox}" @close="isTopbarBox=false"></topbar-box>
 	</div>
 </template>
 <script>
@@ -25,7 +26,8 @@ import {mapGetters} from 'vuex'
 			return {
 				swiperOption: {
                 	slidesPerView: 6
-            	}
+            	},
+            	isTopbarBox: false
 			}
 		},
 		computed: {
@@ -43,7 +45,11 @@ import {mapGetters} from 'vuex'
 	        font-size: 0.16rem;
 	        text-align: center;
 	        position: relative;
-	        background: #f3f4f5;
+	        background-color: #f3f4f5;
+
+	        .topbar-active {
+	        	top: 0.1rem;
+	        }
 		}
 		
 		@descendent menu {

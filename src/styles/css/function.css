@@ -22,3 +22,10 @@
     background-repeat: no-repeat;
     background-position: top;
 }
+
+.bb {
+    background-image: linear-gradient(180deg, transparent 0%, #ddd 50%, #ddd 100%);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
