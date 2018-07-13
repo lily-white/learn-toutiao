@@ -49,6 +49,14 @@ export default {
 }
 #view {
   transition: all .5s cubic-bezier(0.55, 0, 0.1, 1);
+ /* height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;*/
+  display: flex;
+  flex-direction: column;
+  size: 100%;
 }
 .slide-left-enter {
   opacity: 0;

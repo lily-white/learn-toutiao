@@ -18,8 +18,7 @@ import {headerBar, footerBar} from './index.js'
 <style>
 .main {
 	width: 100%;
-	height: 200px;
-	font-size: 60px;
+	height: calc(100% - 1rem);
 }
 	
-</style>
+</style>k

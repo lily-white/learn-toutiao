@@ -2,7 +2,7 @@
 	<div class="topbar-wrapper df-sb bb">
 		<div class="topbar-menu">
 			<swiper :options="swiperOption">
-				<swiper-slide v-for="(item, index) in menuList" :class="{'is-active': menuIndex === index}" :key="index">{{item.title}}</swiper-slide>
+				<swiper-slide v-for="(item, index) in menuList" :class="{'is-active': menuIndex === index}" :key="index" @click.native="active(index)">{{item.title}}</swiper-slide>
 			</swiper>
 		</div>
 		<div class="topbar-more-btn fc">
@@ -32,6 +32,12 @@ import {mapGetters} from 'vuex'
 		},
 		computed: {
 			...mapGetters(['menuList', 'menuIndex'])
+		},
+		methods: {
+			active(id) {
+				this.$store.state.home.menuIndex = id;
+				this.$store.dispatch('getHomeList');
+			}
 		}
 	}
 </script>
