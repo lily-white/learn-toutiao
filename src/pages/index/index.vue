@@ -1,10 +1,10 @@
 <template>
 	<div class="home-wrapper">
 		<topbar></topbar>
-		<div class="news-box">	
-			<ul class="news-list" v-for="item in newsList">
-				<li class="news-item bb" v-if="item.images.length === 0">
-					<div>
+		<div class="news-box wrapper" ref="wrapper">	
+			<ul class="news-list content">
+				<li class="news-item bb" v-for="item in newsList">
+					<div v-if="item.images.length === 0">
 						<h4 class="news-title">{{item.title}}</h4>
 						<p class="news-content">{{item.intro}}</p>
 						<div class="news-info">
@@ -12,9 +12,7 @@
 							<span>评论：{{item.comment}}</span>
 						</div>
 					</div>
-				</li>
-				<li class="news-item bb" v-else-if="item.images.length === 1">
-					<div class="df-sb">
+					<div class="df-sb" v-else-if="item.images.length === 1">
 						<div class="item-l">
 							<h4 class="news-title">{{item.title}}</h4>
 							<p class="news-content line2">{{item.intro}}</p>
@@ -27,9 +25,7 @@
 							<img :src="item.images[0]">
 						</div>
 					</div>
-				</li>
-				<li class="news-item bb" v-else>
-					<div>
+					<div v-else>
 						<h4 class="news-title">{{item.title}}</h4>
 						<p class="news-content">{{item.intro}}</p>
 						<div class="news-imgs df-sb">
@@ -48,17 +44,48 @@
 <script>
 	import Topbar from './topbar/index.vue'
 	import {mapGetters} from 'vuex'
+	import BScroll from 'better-scroll'
+	import axios from '@/utils/fetch.js'
+
 	export default {
 		name: 'index',
 		components: {
 			Topbar
 		},
 		created() {
-			this.$store.dispatch('getHomeList');
-			console.log(this.newsList)
+			this.loadData();
 		},
 		computed: {
-			...mapGetters(['newsList'])
+			...mapGetters(['menuList', 'menuIndex'])
+		},
+		data() {
+			return {
+				newsList: []
+			}
+		},
+		methods: {
+			loadData() {
+				const me = this;
+				axios.get('home/list', this.menuList[this.menuIndex])
+					 .then(res => {
+					 	me.newsList = res.data.data.list.concat(me.newsList)
+					 	me.$nextTick(() => {
+					 		debugger
+				            if (!this.scroll) {
+				              me.scroll = new BScroll(me.$refs.wrapper, {})
+				              me.scroll.on('touchend', (pos) => {
+				              	debugger
+				                if (me.scroll.y <= (me.scroll.maxScrollY + 50)) {
+				                  me.loadData()
+				                }
+				              })
+				            } else {
+				              me.scroll.refresh()
+				            }
+				        })
+					})
+				
+			}
 		}
 	}
 </script>
@@ -66,11 +93,13 @@
 	.news-box {
 		width: 100%;
     	height: calc(100% - 0.4rem);
-		overflow-y: scroll;
+		overflow: hidden;
+		position: relative;
+		transform: rotate(0deg);
 	}
 	@component news {
 		@descendent list {
-
+			z-index: 10;
 		}
 
 		@descendent item {

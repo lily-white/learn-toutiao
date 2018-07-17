@@ -37,8 +37,6 @@ const home = {
 		},
 		[GET_HOME_LIST](state, list) {
 			state.newsList = list;
-
-			// Vue.$set(state.menuList, state.menuIndex, list);
 		}
 	}
 }
