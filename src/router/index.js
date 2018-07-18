@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/pages/Layout/index.vue'
 import Index from '@/pages/Index/index.vue'
+import Search from '@/pages/Search/index.vue'
 import Video from '@/pages/Video/index.vue'
 
 Router.prototype.animate = 0;
@@ -18,6 +19,14 @@ const routes = [
       children: [
       	{path: '', component: Index}
       ]
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search,
+      meta: {
+        slide: 1
+      }
     },
     {
       path: '/video',

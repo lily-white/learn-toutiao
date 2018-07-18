@@ -5,13 +5,18 @@
 		</div>
 		<div class="header-search">
 			<icon-svg name="2fangdajing" class="icon-search"></icon-svg>
-			<input type="text" placeholder="搜索些啥呢..." readonly="readonly">	
+			<input type="text" placeholder="搜索些啥呢..." readonly="readonly" @click="toSearch()">	
 		</div>
 	</div>
 </template>
 <script>
 	export default {
-		name: 'headerBar'
+		name: 'headerBar',
+		methods: {
+			toSearch() {
+				this.$router.push('/search');
+			}
+		}
 	}
 </script>
 <style>
