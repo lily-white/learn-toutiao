@@ -1,13 +1,13 @@
 <template>
-	<div class="search-wrapper">
+	<div class="search-wrapper mescroll">
 		<div class="search-head df-sb bb">
 			<div class="search-input">
 				<icon-svg name="2fangdajing" class="search-icon"></icon-svg>
-				<input />
+				<input @change="init"/>
 			</div>
 			<div class="search-close">取消</div>
 		</div>
-		<div class="search-guess">
+		<div class="search-guess" v-show="false">
 			<div class="tips">猜你想搜的</div>
 			<ul class="search-guess-list bt">
 				<li class="search-guess-item border-half">Easy-Mock</li>
@@ -16,11 +16,11 @@
 				<li class="search-guess-item border-half">Easy-Mock</li>
 			</ul>
 		</div>
-		<scroll-list></scroll-list>			
+		<scroll-list :axios="axios" top='0.5rem' bottom='0' ref="scroll"></scroll-list>			
 	</div>
 </template>
 <script>
-	import axios from 'axios'
+	import axios from '@/utils/fetch.js'
 	export default {
 		name: 'search',
 		data() {
@@ -29,7 +29,12 @@
 			}
 		},
 		created() {
-			this.axios = axios.get('');
+			this.axios = axios.get('home/list', 1);
+		},
+		methods: {
+			init() {
+				this.$refs.scroll.loadData();
+			}
 		}
 	}
 </script>
@@ -38,7 +43,7 @@
 		@descendent wrapper {
 			width: 100%;
 			background: #fff;
-		    
+		    overflow: hidden;
 		}
 
 		@descendent head {

@@ -36,7 +36,7 @@ import {mapGetters} from 'vuex'
 		methods: {
 			active(id) {
 				this.$store.state.home.menuIndex = id;
-				this.$store.dispatch('getHomeList');
+				this.$emit('changeMenu');
 			}
 		}
 	}

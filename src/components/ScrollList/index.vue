@@ -1,5 +1,5 @@
 <template>
-	<div class="news-box" id="mescroll">	
+	<div class="news-box" id="mescroll" :style="{'top': top, 'bottom': bottom}">	
 		<ul class="news-list" id="dataList">
 			<li class="news-item bb" v-for="item in newsList">
 				<div v-if="item.images.length === 0">
@@ -39,25 +39,33 @@
 	</div>
 </template>
 <script>
-	import mescroll from 'mescroll'
-	import 'mescroll/src/mescroll.min.css'
+	import MeScroll from 'mescroll.js'
+	import 'mescroll.js/mescroll.min.css'
+	import axios from '@/utils/fetch.js'
+	// import axios from 'axios'
+
 	export default {
 		name: 'scrollList',
 		data() {
 			return {
 				mecroll: null,
-				newsList: []
+				newsList: [],
+				page: 0
 			}
 		},
 		props: {
-			axios: Promise
+			top: String,
+			bottom: String,
+			url: String,
+			params: Object
 		},
 		mounted() {
-			this.mescroll = new mescroll("mescroll", { 
+			const me = this;
+			this.mescroll = new MeScroll("mescroll", { 
                 down: {use: false},
                 up: {
-                    auto:true,
-                    callback: this.loadData , //上拉加载的回调
+                    auto: false,
+                    callback: me.loadData , //上拉加载的回调
                     isBounce: false, //如果您的项目是在iOS的微信,QQ,Safari等浏览器访问的,建议配置此项.解析(必读)
                     empty:{ //配置列表无任何数据的提示
 						warpId:"dataList",
@@ -71,20 +79,21 @@
                 
             });
 		},
-		created() {
-			this.loadData();
-		},
 		methods: {
-			loadData(page) {
+			loadData() {
 				const me = this;
-				let hasNext = true;
-				let i = 0;
-				this.axios.then(res => {
-					 	me.newsList = res.data.data.list.concat(me.newsList);
-					 	i++;
-					 	me.mescroll.endSuccess(5, i < 3);
-					})
+
+				axios.get(this.url, this.params).then(res => {
+				 	me.newsList = res.data.data.list.concat(me.newsList);
+				 	me.page++;
+				 	me.mescroll.endByPage(10,3);
+				})
 				
+			},
+			reset() {
+				this.newsList = [];
+				console.log(this.newsList);
+				this.mescroll.resetUpScroll();
 			}
 		}
 	}
@@ -95,8 +104,6 @@
 		@descendent box {
 			width: 100%;
 			position: fixed;
-			top: 0.9rem;
-			bottom: 0.5rem;
 			height: auto;
 			overflow-y: auto;
 		}

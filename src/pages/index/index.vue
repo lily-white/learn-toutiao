@@ -1,29 +1,41 @@
 <template>
 	<div class="home-wrapper">
-		<topbar></topbar>
-		<scroll-list :axios="axios"></scroll-list>
+		<topbar @changeMenu="changeMenu"></topbar>
+		<scroll-list top='0.9rem' bottom='0.5rem' ref="scroll" :url="url" :params="params"></scroll-list>	
 	</div>
 </template>
 <script>
 	import Topbar from './topbar/index.vue'
 	import {mapGetters} from 'vuex'
-	import axios from '@/utils/fetch.js'
 
 	export default {
 		name: 'index',
 		components: {
 			Topbar
 		},
+		computed: {
+			...mapGetters(['menuList', 'menuIndex'])
+		},
 		data() {
 			return {
-				axios: null
+				axios: null,
+				params: null,
+				url: 'home/list',
+				params: null
 			}
 		},
 		created() {
-			this.axios = axios.get('home/list', this.menuList[this.menuIndex])
 		},
-		computed: {
-			...mapGetters(['menuList', 'menuIndex'])
+		mounted() {
+			this.params = this.menuList[this.menuIndex];
+			this.$refs.scroll.loadData('home/list', this.menuList[this.menuIndex]);
+		},
+		methods: {
+			changeMenu() {
+				this.$refs.scroll.reset();
+				this.params = this.menuList[this.menuIndex];
+				this.$refs.scroll.loadData('home/list', this.menuList[this.menuIndex]);
+			}
 		}
 	}
 </script>
