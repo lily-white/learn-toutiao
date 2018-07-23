@@ -16,7 +16,7 @@
 				<li class="search-guess-item border-half">Easy-Mock</li>
 			</ul>
 		</div>
-		<scroll-list :axios="axios" top='0.5rem' bottom='0' ref="scroll"></scroll-list>			
+		<scroll-list top='0.5rem' bottom='0' ref="scroll" :url="url" :params="params"></scroll-list>			
 	</div>
 </template>
 <script>
@@ -25,14 +25,14 @@
 		name: 'search',
 		data() {
 			return {
-				axios: null
+				url: 'search',
+				params: null
 			}
 		},
 		created() {
-			this.axios = axios.get('home/list', 1);
 		},
 		methods: {
-			init() {
+			search() {
 				this.$refs.scroll.loadData();
 			}
 		}

@@ -18,23 +18,20 @@
 		},
 		data() {
 			return {
-				axios: null,
-				params: null,
 				url: 'home/list',
 				params: null
 			}
 		},
 		created() {
+			this.params = this.menuList[this.menuIndex];
 		},
 		mounted() {
-			this.params = this.menuList[this.menuIndex];
-			this.$refs.scroll.loadData('home/list', this.menuList[this.menuIndex]);
+			
+			this.$refs.scroll.loadData();
 		},
 		methods: {
 			changeMenu() {
-				this.$refs.scroll.reset();
 				this.params = this.menuList[this.menuIndex];
-				this.$refs.scroll.loadData('home/list', this.menuList[this.menuIndex]);
 			}
 		}
 	}

@@ -1,16 +1,16 @@
 <template>
-	<div class="topbar-wrapper df-sb bb">
-		<div class="topbar-menu">
-			<swiper :options="swiperOption">
-				<swiper-slide v-for="(item, index) in menuList" :class="{'is-active': menuIndex === index}" :key="index" @click.native="active(index)">{{item.title}}</swiper-slide>
-			</swiper>
+		<div class="topbar-wrapper df-sb bb">
+			<div class="topbar-menu">
+				<swiper :options="swiperOption" ref="swiper-box">
+					<swiper-slide v-for="(item, index) in menuList" :class="{'is-active': menuIndex === index}" :key="index" @click.native="active(index)" :id="index">{{item.title}}</swiper-slide>
+				</swiper>
+			</div>
+			<a class="topbar-more-btn fc" @click="isTopbarBox=true" href="javascript:void(0)">
+				<i class="list-shadow"></i>
+				<span class="cross"></span>
+			</a>
+			<topbar-box :class="{'topbar-active': isTopbarBox}" @close="isTopbarBox=false"></topbar-box>
 		</div>
-		<div class="topbar-more-btn fc">
-			<i class="list-shadow"></i>
-			<span class="cross" @click="isTopbarBox=true"></span>
-		</div>
-		<topbar-box :class="{'topbar-active': isTopbarBox}" @close="isTopbarBox=false"></topbar-box>
-	</div>
 </template>
 <script>
 import 'swiper/dist/css/swiper.css'
@@ -31,12 +31,15 @@ import {mapGetters} from 'vuex'
 			}
 		},
 		computed: {
-			...mapGetters(['menuList', 'menuIndex'])
+			...mapGetters(['menuList', 'menuIndex']),
+			swiper() {
+				return this.$refs['swiper-box'].swiper;
+			}
 		},
 		methods: {
-			active(id) {
+			async active(id) {
 				this.$store.state.home.menuIndex = id;
-				this.$emit('changeMenu');
+				await this.$emit('changeMenu');
 			}
 		}
 	}
@@ -69,6 +72,7 @@ import {mapGetters} from 'vuex'
 		@descendent more-btn {
 			width: 0.4rem;
 			height: 100%;
+			z-index: 10;
 			position: relative;
 
 			.list-shadow {

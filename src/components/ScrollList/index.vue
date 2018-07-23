@@ -42,7 +42,6 @@
 	import MeScroll from 'mescroll.js'
 	import 'mescroll.js/mescroll.min.css'
 	import axios from '@/utils/fetch.js'
-	// import axios from 'axios'
 
 	export default {
 		name: 'scrollList',
@@ -92,8 +91,12 @@
 			},
 			reset() {
 				this.newsList = [];
-				console.log(this.newsList);
 				this.mescroll.resetUpScroll();
+			}
+		},
+		watch: {
+			params() {
+				this.reset();
 			}
 		}
 	}
