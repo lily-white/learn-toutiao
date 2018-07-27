@@ -1,6 +1,5 @@
 import {footerList, menuList} from './menu.js'
 import axios from '@/utils/fetch.js'
-import Vue from 'vue'
 
 const DEL_MENU = 'DEL_MENU'
 const ADD_MENU = 'ADD_MENU'

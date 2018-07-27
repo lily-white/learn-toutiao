@@ -3,7 +3,7 @@
 		<div class="search-head df-sb bb">
 			<div class="search-input">
 				<icon-svg name="2fangdajing" class="search-icon"></icon-svg>
-				<input @change="init"/>
+				<input @change="search" v-model="keyword"/>
 			</div>
 			<div class="search-close">取消</div>
 		</div>
@@ -21,6 +21,7 @@
 </template>
 <script>
 	import axios from '@/utils/fetch.js'
+	import {mapGetters} from 'vuex'
 	export default {
 		name: 'search',
 		data() {
@@ -30,6 +31,16 @@
 			}
 		},
 		created() {
+		},
+		computed: {
+			keyword: {
+				get() {
+					return this.$store.state.search.keyword;
+				},
+				set(value) {
+					this.$store.dispatch('updateKeyword', keyword);
+				}
+			}
 		},
 		methods: {
 			search() {
