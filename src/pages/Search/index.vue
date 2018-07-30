@@ -3,20 +3,18 @@
 		<div class="search-head df-sb bb">
 			<div class="search-input">
 				<icon-svg name="2fangdajing" class="search-icon"></icon-svg>
-				<input @change="search" v-model="keyword"/>
+				<input @change="search(keyword)" v-model="keyword"/>
 			</div>
-			<div class="search-close">取消</div>
+			<div class="search-close" @click="$router.go(-1)">取消</div>
 		</div>
-		<div class="search-guess" v-show="false">
+		<div class="search-guess" v-show="showGuess">
 			<div class="tips">猜你想搜的</div>
 			<ul class="search-guess-list bt">
-				<li class="search-guess-item border-half">Easy-Mock</li>
-				<li class="search-guess-item border-half">Easy-Mock</li>
-				<li class="search-guess-item border-half">Easy-Mock</li>
-				<li class="search-guess-item border-half">Easy-Mock</li>
+				<li class="search-guess-item border-half" v-for="item in keywords" @click="search(item)">{{item}}</li>
 			</ul>
 		</div>
-		<scroll-list top='0.5rem' bottom='0' ref="scroll" :url="url" :params="params"></scroll-list>			
+		<scroll-list bottom='0' ref="scroll" :url="url" :params="params" :class="{'hidden': showGuess}"></scroll-list>	
+		
 	</div>
 </template>
 <script>
@@ -27,7 +25,9 @@
 		data() {
 			return {
 				url: 'search',
-				params: null
+				keywords: ['Easy-Mock', 'webpack', 'vue', 'Javascript'],
+				params: null,
+				showGuess: true
 			}
 		},
 		created() {
@@ -38,18 +38,29 @@
 					return this.$store.state.search.keyword;
 				},
 				set(value) {
-					this.$store.dispatch('updateKeyword', keyword);
+					this.$store.dispatch('updateKeyword', value);
 				}
 			}
 		},
 		methods: {
-			search() {
+			search(keyword) {
+				this.showGuess = false;
+				this.keyword = keyword;
+				this.params = {keyword : keyword};
+
+				this.$refs.scroll.reset();
 				this.$refs.scroll.loadData();
 			}
 		}
 	}
 </script>
 <style>
+.news-box {
+	top: 0.5rem;
+}
+.news-box.hidden {
+	top: 100%
+}
 	@component search {
 		@descendent wrapper {
 			width: 100%;
