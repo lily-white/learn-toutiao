@@ -1,7 +1,7 @@
 <template>
 	<div class="news-box" id="mescroll" :style="{'top': top, 'bottom': bottom}">	
 		<ul class="news-list" id="dataList">
-			<li class="news-item bb" v-for="item in newsList">
+			<router-link tag="li" :to="{path: '/article'}" class="news-item bb" v-for="item in newsList">
 				<div v-if="item.images.length === 0">
 					<h4 class="news-title">{{item.title}}</h4>
 					<p class="news-content">{{item.intro}}</p>
@@ -34,7 +34,7 @@
 						<span>评论：{{item.comment}}</span>
 					</div>
 				</div>
-			</li>
+			</router-link>
 		</ul>
 	</div>
 </template>
@@ -92,6 +92,10 @@
 			reset() {
 				this.newsList = [];
 				this.mescroll.resetUpScroll();
+			},
+			toArticle() {
+				debugger
+				this.$router.push('/article');
 			}
 		},
 		watch: {

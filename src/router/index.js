@@ -4,6 +4,7 @@ import Layout from '@/pages/Layout/index.vue'
 import Index from '@/pages/Index/index.vue'
 import Search from '@/pages/Search/index.vue'
 import Video from '@/pages/Video/index.vue'
+import Article from '@/pages/Article/index.vue'
 
 Router.prototype.animate = 0;
 Vue.use(Router)
@@ -36,6 +37,11 @@ const routes = [
         {path: '', component: Video}
       ]
       
+    },
+    {
+      path: '/article',
+      name: 'article',
+      component: Article
     }
 ];
 
