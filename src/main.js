@@ -11,6 +11,10 @@ import InstallComponents from './components/install-components.js'
 Vue.use(InstallComponents)
 
 Vue.config.productionTip = false
+Vue.prototype.back = (route) => {
+	route.animate = 2;
+	route.go(-1);
+}
 
 /* eslint-disable no-new */
 new Vue({

@@ -1,39 +1,51 @@
 <template>
 	<div class="article-wrapper">
 		<div class="article-head df-sb bb">
-			<icon-svg name="jiantou"></icon-svg>
+			<icon-svg name="jiantou" @click.native="back($router)"></icon-svg>
 			<icon-svg name="More"></icon-svg>
 		</div>
 		<div>
-			<h2 class="article-title">收七林才参</h2>
+			<h2 class="article-title">{{article.title}}</h2>
 			<div class="article-info df-sb">
 				<div class="article-author df-sa">
-					<img src="https://dummyimage.com/70x70/" class="avartar">
+					<img :src="article.avatar" class="avartar">
 					<div class="author-name">
-						<h6>央视网新闻</h6>
-						<div class="article-date">18小时前</div>
+						<h6>{{article.source}}</h6>
+						<div class="article-date">{{article.time}}小时前</div>
 					</div>
 				</div>
-				<div class="follow-btn border-half">已关注</div>
+				<div class="follow-btn" 
+					:class="article.attention? 'like-n border-half' : 'like-y'"
+					@click="article.attention = !article.attention">{{article.attention ? '已关注' : '关注'}}</div>
 			</div>
 			<div class="article-content">
-				<p>战料常采处教照电好矿热政边消再正。期安构京但合感长都力千已命取。入管长因会会传进表较去至定设。级走则具加见数至法后别样备不但。参展应元参每石示合出感写把。格史按持现人作实形眼指级无。七比金常种书其理对边本系。位区它收根就期华最气表党如区群点。手必九员拉我商做内增内工历族六取也。般持队义取之经金响般全系花易状。际少面半科条至里事容天价积平具。水的运部党样近程有元问没体看到。证动小间人十件易风类计被第斗建例。设正方到许制她些命安边究性。准而步克题图六出温易查连院育通反头单。好龙织率话接与酸名数你先真管查的。造回经速圆强连且存地院好他并影计还。果路义生火周入法干山率团完价。马信人眼更革区问对那斯果验图。却精己即会县日青我小到则华并断。亲位计两层快斯习易并务山治工身果。二声属量群土这论白全车院备眼织基。容知反情去自器力参心力行。如流始美相此物主市律么林军联五。我往按里作关思太又水属系好工效因。条政标运议非教产起识报共无低构道群。强设民王开布除当万期想现。</p>
+				<p>{{article.intro}}</p>
 			</div>
 		</div>
 		<div class="tags">
-			<div class="tag-item">委接听感</div>
+			<div class="tag-item" v-for="tag in article.tags">{{tag}}</div>
 		</div>
-		<div class="like-btn">
+		<div class="like-btn" :class="{'is-liked': article.islike}" @click="article.islike = !article.islike">
 			<icon-svg  name="zan"></icon-svg>
-			<span>173</span>
+			<span>{{article.like_num}}</span>
 		</div>
 	</div>
 </template>
 <script>
+	import axios from '@/utils/fetch.js'
+
 	export default {
 		name: 'article',
+		data() {
+			return {
+				article: null
+			}
+		},
 		created() {
-			console.log(this.$route.params.articleId)
+			axios.get('article/info',{id: this.$route.params.articleId})
+				 .then(res => {
+				 	this.article = res.data.data;
+			 	 })
 		}
 	}
 </script>
@@ -73,7 +85,17 @@
 
 		    @when liked{
 		    	border-color: #ccc;
+		    	color: #000;
 		    }
+		}
+
+		.like-y {
+			color: #f4f4f4;
+    		background-color: #d43d3d;
+		}
+
+		.like-n {
+			color: #bbb;
 		}
 	}
 

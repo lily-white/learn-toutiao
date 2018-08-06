@@ -58,11 +58,13 @@ export default {
   flex-direction: column;
   size: 100%;
 }
-.slide-left-enter {
+.slide-left-enter,
+.slide-right-leave-to {
   opacity: 0;
   transform: translate(100%, 0);
 }
-.slide-left-leave-to {
+.slide-left-leave-to, 
+.slide-right-enter {
   opacity: 0;
   transform: translate(-100%, 0);
 }

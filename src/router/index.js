@@ -41,7 +41,10 @@ const routes = [
     {
       path: '/article/:articleId',
       name: 'article',
-      component: Article
+      component: Article,
+      meta: {
+        slide: 1
+      }
     }
 ];
 
