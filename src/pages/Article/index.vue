@@ -42,9 +42,12 @@
 			}
 		},
 		created() {
+			this.$showCircleLoading();
+
 			axios.get('article/info',{id: this.$route.params.articleId})
 				 .then(res => {
 				 	this.article = res.data.data;
+				 	this.$hideCircleLoading();
 			 	 })
 		}
 	}

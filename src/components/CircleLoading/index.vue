@@ -1,75 +1,77 @@
+<!-- 手机Loading -->
 <template>
-	<div class="loader-wrapper">
-		<div class="loader">
-			<svg class="loader-circular" viewBox="25 25 50 50">
-                <circle class="loader-path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle>
-            </svg>
-		</div>
-	</div>
+    <div class="loading-wrapper-phone">
+        <div class="toast toast-loading">
+            <div class="toast-loading-wrap">
+                <div class="toast-loading-leaf" v-for="(v, i) in 12" :style="{transform: `rotate(${30*i}deg) translate(7.92px)`, animationDelay: i*0.1+'s'}"></div>
+            </div>
+            <p class="toast-loading-text">数据加载中</p>
+        </div>
+    </div>
 </template>
-<script>
-	
-</script>
-<style>
-	
-	.loader-path {
-        stroke-dasharray: 1, 200;
-        stroke-dashoffset: 0;
-        animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-        stroke-linecap: round;
-    }
-    .loader-circular {
-        animation: rotate 2s linear infinite;
-        height: 100%;
-        transform-origin: center center;
+<style scoped>
+    .loading-wrapper-phone {
+        position: fixed;
+        z-index: 1000;
         width: 100%;
-        position: absolute;
+        height: 100%;
         top: 0;
-        bottom: 0;
         left: 0;
-        right: 0;
-        margin: auto;
-    }
-    @keyframes rotate {
-        from {
-            transform: rotate(0deg);
+        .toast {
+            left: 50%;
+            top: 35%;
+            margin-left: -3.8em;
+            transition-duration: .2s;
+            transform: scale(0.9);
+            z-index: 100;
+            position: fixed;
+            width: 7.6em;
+            min-height: 7.6em;
+            margin-left: -3.8em;
+            background: rgba(0, 0, 0, .5);
+            text-align: center;
+            border-radius: 5px;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
-        50% {
-            transform: rotate(180deg);
+        .toast-loading-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 3em;
         }
-        to {
-            transform: rotate(360deg);
+        .toast-loading-leaf {
+            top: -1px;
+            opacity: .25;
+            animation: toast-loading 1.2s linear infinite;
+        }
+        .toast-loading-leaf:before {
+            content: " ";
+            position: absolute;
+            width: 8.14px;
+            height: 3.08px;
+            background: #d1d1d5;
+            box-shadow: 0 0 1px rgba(0, 0, 0, .0980392);
+            border-radius: 1px;
+            -webkit-transform-origin: left 50% 0;
+            transform-origin: left 50% 0
         }
     }
 
-    @keyframes dash {
-        0% {
-            stroke-dasharray: 1, 200;
-            stroke-dashoffset: 0;
-        }
-        50% {
-            stroke-dasharray: 89, 200;
-            stroke-dashoffset: -35;
-        }
-        100% {
-            stroke-dasharray: 89, 200;
-            stroke-dashoffset: -124;
-        }
-    }
-    @keyframes color {
+    @keyframes toast-loading {
         0%,
+        16.6767% {
+            opacity: .25;
+        }
+        16.6867% {
+            opacity: 1;
+        }
+        76.6767%,
         100% {
-            stroke: #FFD300;
-        }
-        40% {
-            stroke: #5B7492;
-        }
-        66% {
-            stroke: #FFD300;
-        }
-        80%,
-        90% {
-            stroke: #acb9c8;
+            opacity: .25;
         }
     }
 </style>
