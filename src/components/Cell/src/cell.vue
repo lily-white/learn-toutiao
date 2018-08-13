@@ -94,17 +94,17 @@
 		}
 
 		&:last-of-type {
-			background-image: linear-gradient(0, #d9d9d9, #d9d9d9 50%, transparent 100%);
+			background-image: linear-gradient(0, #ddd, #ddd 50%, transparent 100%);
 			background-repeat: no-repeat;
 		    background-size: 100% 1px;
 		    background-position: bottom left;
 		}
 
 		@descendent wrapper {
-			background-image: linear-gradient(180deg, #d9d9d9, #d9d9d9 50%, transparent 100%);
+			background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 100%);
 			background-repeat: no-repeat;
-		    background-origin: content-box;
 		    background-position: top left;
+		    background-origin: content-box;
 			background-size: 120% 1px;
 			padding: 0 10px;
 			display: flex;
@@ -130,7 +130,8 @@
 		}
 
 		@descendent value {
-			color: #888;
+			color: #666;
+		    font-size: 0.12rem;
 
 			@when link {
 				margin-right: 24px;

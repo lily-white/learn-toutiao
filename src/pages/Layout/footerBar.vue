@@ -28,6 +28,7 @@
 		width: 100%;
 		height: 0.5rem;
 		font-size: 0.16rem;
+		color: #505050;
 
 		@descendent item {
 			flex: 1;
