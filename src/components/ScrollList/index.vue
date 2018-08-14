@@ -1,5 +1,6 @@
 <template>
 	<div class="news-box" id="mescroll" :style="{'top': top, 'bottom': bottom}">	
+		<slot></slot>
 		<ul class="news-list" id="dataList">
 			<router-link tag="li" :to="'/article/' + item.id" class="news-item bb" v-for="item in newsList">
 			<!-- <router-link tag="li" :to="{path:'article', query: {articleId: item.id}}" class="news-item bb" v-for="item in newsList"> -->

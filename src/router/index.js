@@ -6,6 +6,7 @@ import Search from '@/pages/Search/index.vue'
 import Video from '@/pages/Video/index.vue'
 import Article from '@/pages/Article/index.vue'
 import Account from '@/pages/Account/index.vue'
+import Record from '@/pages/record/index.vue'
 
 Router.prototype.animate = 0;
 Vue.use(Router)
@@ -51,6 +52,14 @@ const routes = [
       path: '/account',
       name: 'account',
       component: Account,
+      meta: {
+        slide: 1
+      }
+    },
+    {
+      path: '/record',
+      name: 'record',
+      component: Record,
       meta: {
         slide: 1
       }

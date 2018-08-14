@@ -14,10 +14,10 @@
 				</ul>
 			</div>
 			<ul class="account-action df-sa bb">
-				<li class="action-item" v-for="item in actionList">
+				<router-link class="action-item" v-for="(item, index) in actionList" tag="li" :to="{path: 'record', query: {type: index}}">
 					<icon-svg :name="item.icon" :class="'icon-' + item.icon"></icon-svg>
 					<label class="action-name">{{item.title}}</label>
-				</li>
+				</router-link>
 			</ul>
 			<div class="mb10">
 				<mt-cell title="消息通知" :href="{path:''}" isLink ></mt-cell>

@@ -2,6 +2,7 @@ import Icon from './IconSvg'
 import TopbarBox from './TopbarBox'
 import ScrollList from './ScrollList'
 import Cell from './Cell'
+import HeaderBar from './HeaderBar'
 import {showCircleLoading, hideCircleLoading} from './CircleLoading/index.js'
 
 const install = Vue => {
@@ -9,6 +10,7 @@ const install = Vue => {
 	Vue.component(TopbarBox.name, TopbarBox);
 	Vue.component(ScrollList.name, ScrollList);
 	Vue.component(Cell.name, Cell);
+	Vue.component(HeaderBar.name, HeaderBar);
 
 	Vue.$showCircleLoading = Vue.prototype.$showCircleLoading = showCircleLoading;
 	Vue.$hideCircleLoading = Vue.prototype.$hideCircleLoading = hideCircleLoading;
