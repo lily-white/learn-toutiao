@@ -83,13 +83,11 @@
 		methods: {
 			loadData() {
 				const me = this;
-
 				axios.get(this.url, this.params).then(res => {
 				 	me.newsList = res.data.data.list.concat(me.newsList);
 				 	me.page++;
 				 	me.mescroll.endByPage(10,3);
 				})
-				
 			},
 			reset() {
 				this.newsList = [];

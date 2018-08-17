@@ -2,7 +2,7 @@
 	<div>
 		<header-bar title="收藏/历史"></header-bar>
 		<ul class="bt fc tab-container">
-			<li class="tab-item" :class="{'is-active': index == type}" v-for="(item, index) in types">{{item.title}}</li>
+			<li class="tab-item" :class="{'is-active': index == type}" v-for="(item, index) in types" @click="changeRecord(index)">{{item.title}}</li>
 		</ul>
 		<scroll-list top='0.9rem' bottom='0' ref="scroll" :url="url" :params="params">
 			<div class="record-tip">昨天总共阅读了9篇文章</div>
@@ -27,13 +27,19 @@
 		created() {
 			
 		},
-		actived() {
+		activated() {
 			this.type = this.$route.query.type;
 			this.params = {title: this.types[this.type].title};
 		},
 		mounted() {
 			this.$refs.scroll.loadData();
 		},
+		methods: {
+			changeRecord(index) {
+				this.type = index;
+				this.params = {title: this.types[this.type].title};
+			}
+		}
 	}
 </script>
 <style>
