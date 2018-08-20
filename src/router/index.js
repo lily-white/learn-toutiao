@@ -7,6 +7,7 @@ import Video from '@/pages/Video/index.vue'
 import Article from '@/pages/Article/index.vue'
 import Account from '@/pages/Account/index.vue'
 import Record from '@/pages/record/index.vue'
+import Headline from '@/pages/headline/index.vue'
 
 Router.prototype.animate = 0;
 Vue.use(Router)
@@ -41,17 +42,26 @@ const routes = [
       
     },
     {
-      path: '/article/:articleId',
-      name: 'article',
-      component: Article,
-      meta: {
-        slide: 1
-      }
+      path: '/headline',
+      name: 'headline',
+      component: Layout,
+      children: [
+        {path: '', component: Headline}
+      ]
+      
     },
     {
       path: '/account',
       name: 'account',
       component: Account,
+      meta: {
+        slide: 1
+      }
+    },
+    {
+      path: '/article/:articleId',
+      name: 'article',
+      component: Article,
       meta: {
         slide: 1
       }
